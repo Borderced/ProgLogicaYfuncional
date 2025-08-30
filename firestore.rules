@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Función para verificar si el usuario está autenticado
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Función para verificar si el usuario es administrador
+    function isAdmin() {
+      return isAuthenticated() && 
+             exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // Función para verificar si el usuario es el propietario del recurso
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Reglas para la colección de usuarios
+    match /users/{userId} {
+      // Los usuarios pueden leer su propia información, los admins pueden leer todo
+      allow read: if isOwner(userId) || isAdmin();
+      
+      // Solo se puede crear durante el registro (desde el backend)
+      allow create: if isAuthenticated();
+      
+      // Los usuarios pueden actualizar su propia información, los admins pueden actualizar todo
+      allow update: if isOwner(userId) || isAdmin();
+      
+      // Solo los admins pueden eliminar usuarios
+      allow delete: if isAdmin();
+    }
+
+    // Reglas para la colección de documentos
+    match /documents/{documentId} {
+      // Los usuarios pueden leer sus propios documentos, los admins pueden leer todo
+      allow read: if isAuthenticated() && 
+                     (resource.data.uploadedBy == request.auth.uid || isAdmin());
+      
+      // Solo usuarios autenticados pueden crear documentos
+      allow create: if isAuthenticated() && 
+                       request.auth.uid == resource.data.uploadedBy;
+      
+      // Los usuarios pueden actualizar sus propios documentos, los admins pueden actualizar todo
+      allow update: if isAuthenticated() && 
+                       (resource.data.uploadedBy == request.auth.uid || isAdmin());
+      
+      // Los usuarios pueden eliminar sus propios documentos, los admins pueden eliminar todo
+      allow delete: if isAuthenticated() && 
+                       (resource.data.uploadedBy == request.auth.uid || isAdmin());
+    }
+  }
+}

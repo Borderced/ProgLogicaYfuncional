@@ -1,0 +1,56 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Función para verificar si el usuario está autenticado
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Función para verificar si el usuario es administrador
+    function isAdmin() {
+      return isAuthenticated() && 
+             firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // Función para verificar si el path corresponde al usuario
+    function isOwnerPath(path) {
+      return isAuthenticated() && path.matches('.*/' + request.auth.uid + '/.*');
+    }
+
+    // Reglas para archivos en la carpeta documents organizados por usuario: documents/{userId}/{filename}
+    match /documents/{userId}/{filename} {
+      // Permitir lectura si es el propietario del archivo o si es admin
+      allow read: if isAuthenticated() && 
+                     (request.auth.uid == userId || isAdmin());
+      
+      // Permitir escritura solo si es el propietario del directorio
+      allow write: if isAuthenticated() && 
+                      request.auth.uid == userId &&
+                      request.resource.size < 10 * 1024 * 1024 && // Máximo 10MB
+                      (request.resource.contentType.matches('application/pdf') || 
+                       request.resource.contentType.matches('image/.*'));
+      
+      // Permitir eliminación si es el propietario o admin
+      allow delete: if isAuthenticated() && 
+                       (request.auth.uid == userId || isAdmin());
+    }
+    
+    // Mantener compatibilidad con archivos directos (opcional)
+    match /{userId}/{filename} {
+      allow read: if isAuthenticated() && 
+                     (request.auth.uid == userId || isAdmin());
+      allow write: if isAuthenticated() && 
+                      request.auth.uid == userId &&
+                      request.resource.size < 10 * 1024 * 1024 &&
+                      (request.resource.contentType.matches('application/pdf') || 
+                       request.resource.contentType.matches('image/.*'));
+      allow delete: if isAuthenticated() && 
+                       (request.auth.uid == userId || isAdmin());
+    }
+
+    // Regla por defecto: denegar acceso
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
