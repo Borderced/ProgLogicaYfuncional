@@ -1,0 +1,341 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #0f172a;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Estilos para Uppy Dashboard en tema oscuro */
+.uppy-Dashboard {
+  background: rgba(15, 23, 42, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+}
+
+.uppy-Dashboard-inner {
+  background: transparent !important;
+}
+
+.uppy-DashboardContent-bar {
+  background: rgba(30, 41, 59, 0.5) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.uppy-DashboardContent-title {
+  color: white !important;
+}
+
+.uppy-Dashboard-note {
+  color: rgb(156, 163, 175) !important;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Utilidad para truncar texto */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Efectos glassmorphism mejorados */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.5);
+}
+
+/* Animación de resplandor */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(139, 69, 255, 0.3), 
+                0 0 10px rgba(139, 69, 255, 0.2), 
+                0 0 15px rgba(139, 69, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(139, 69, 255, 0.6), 
+                0 0 20px rgba(139, 69, 255, 0.4), 
+                0 0 30px rgba(139, 69, 255, 0.2);
+  }
+}
+
+.glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* Gradientes animados */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient {
+  background: linear-gradient(-45deg, #7c3aed, #3b82f6, #8b5cf6, #06b6d4);
+  background-size: 400% 400%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Efectos de hover mejorados */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 
+              0 0 20px rgba(139, 69, 255, 0.2);
+}
+
+/* Animación de float */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Efectos de partículas */
+.particles {
+  position: relative;
+  overflow: hidden;
+}
+
+.particles::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 160px 30px, rgba(255,255,255,0.2), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: sparkle 10s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes sparkle {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(200px);
+  }
+}
+
+/* Backdrop blur fuerte para modales */
+.modal-backdrop {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(0, 0, 0, 0.6);
+  /* Fallback para navegadores que no soportan backdrop-filter */
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(30, 27, 75, 0.5));
+}
+
+/* Soporte adicional para Firefox */
+@supports not (backdrop-filter: blur()) {
+  .modal-backdrop {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* Efecto de desenfoque extra fuerte */
+.blur-strong {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Animación del backdrop blur */
+@keyframes backdrop-blur-in {
+  from {
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  to {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+}
+
+.backdrop-blur-animate {
+  animation: backdrop-blur-in 0.3s ease-out forwards;
+}
+
+/* Animaciones de fondo mejoradas */
+@keyframes infinite-gradient {
+  0% {
+    background-position: 0% 50%;
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    background-position: 100% 50%;
+    transform: rotate(90deg) scale(1.1);
+  }
+  50% {
+    background-position: 100% 100%;
+    transform: rotate(180deg) scale(1);
+  }
+  75% {
+    background-position: 0% 100%;
+    transform: rotate(270deg) scale(1.1);
+  }
+  100% {
+    background-position: 0% 50%;
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(139, 69, 255, 0.3),
+      0 0 40px rgba(139, 69, 255, 0.2),
+      0 0 60px rgba(139, 69, 255, 0.1),
+      inset 0 0 20px rgba(139, 69, 255, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(139, 69, 255, 0.6),
+      0 0 60px rgba(139, 69, 255, 0.4),
+      0 0 90px rgba(139, 69, 255, 0.2),
+      inset 0 0 30px rgba(139, 69, 255, 0.2);
+  }
+}
+
+@keyframes cosmic-drift {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(50px, -30px) rotate(90deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-20px, 40px) rotate(180deg);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(-40px, -20px) rotate(270deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+/* Clases para elementos de fondo */
+.cosmic-element {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.smooth-animation {
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+/* Optimizaciones de rendimiento */
+.background-layer {
+  contain: layout style paint;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Gradiente animado infinito */
+.infinite-gradient {
+  background: linear-gradient(
+    -45deg, 
+    #0f172a, 
+    #581c87, 
+    #7c3aed, 
+    #8b5cf6, 
+    #0f172a
+  );
+  background-size: 400% 400%;
+  animation: infinite-gradient 20s ease infinite;
+}
+
+/* Resplandor suave */
+.soft-glow {
+  filter: blur(1px);
+  opacity: 0.8;
+}
+
+/* Movimiento ondulante */
+@keyframes wave-motion {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  50% {
+    transform: translateY(0px) translateX(10px);
+  }
+  75% {
+    transform: translateY(10px) translateX(5px);
+  }
+}
+
+.wave-element {
+  animation: wave-motion 8s ease-in-out infinite;
+}
