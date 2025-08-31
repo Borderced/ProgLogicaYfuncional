@@ -9,7 +9,6 @@ Una aplicación web moderna para la gestión de documentos personales con autent
 - **Subida de Archivos**: Soporte para PDFs e imágenes usando Uppy
 - **Gestión de Documentos**: Visualización, descarga y eliminación de documentos
 - **Panel Administrativo**: Vista completa de todos los usuarios y sus documentos
-- **Diseño Moderno**: Interfaz oscura con efectos de blur y gradientes
 
 ## Tecnologías Utilizadas
 
@@ -41,34 +40,26 @@ paginaBecerro/
 
 ## Instalación y Configuración
 
-### 1. Configurar Firebase
+### 1. Configurar Apikeys
+ Descarga el archivo frontend.rar que envie al grupo de whatsapp (extraelo, te saldra un archivo .env) y pegalo dentro de la carpeta ``` frontend ``` en el proyecto
+ Descarga el archivo backend.rar que tambien envie al grupo de whatsapp (extraelo) y pega el contenido dentro de la carpeta ``` backend ``` en el proyecto
 
-1. Ve a [Firebase Console](https://console.firebase.google.com/)
-2. Selecciona tu proyecto `registropersonas-f1653`
-3. Ve a **Firestore Database** → **Reglas** y pega el contenido de `firestore.rules`
-4. Ve a **Storage** → **Reglas** y pega el contenido de `storage.rules`
 
 ### 2. Instalar Dependencias
 
-Las dependencias ya están instaladas, pero si necesitas reinstalarlas:
+Para instalar las dependencias (debes tener nodejs instalado):
 
 ```bash
-# Backend
+# En una terminal en la carpeta Backend
 cd backend
 npm install
 
-# Frontend
+# En una terminal en la carpeta Frontend
 cd ../frontend
 npm install --legacy-peer-deps
 ```
 
 ### 3. Ejecutar la Aplicación
-
-#### Verificar Configuración
-Primero ejecuta el script de verificación:
-```bash
-test-project.bat
-```
 
 #### Opción 1: Manual (Recomendado)
 ```bash
@@ -80,10 +71,6 @@ npm run dev
 cd frontend
 npm start
 ```
-
-#### Opción 2: Scripts Automáticos (Windows)
-- Ejecuta `start-backend.bat` en una terminal
-- Ejecuta `start-frontend.bat` en otra terminal
 
 La aplicación estará disponible en:
 - Frontend: http://localhost:3000
@@ -104,14 +91,8 @@ La aplicación estará disponible en:
 
 ### Para Administradores
 
-1. **Crear Admin**: Registra un usuario y cambia manualmente su rol en Firestore:
-   ```
-   Colección: users
-   Documento: {userId}
-   Campo: role = "admin"
-   ```
-2. **Panel Admin**: Accede al panel de administración para ver todos los documentos
-3. **Gestión**: Ver documentos de todos los usuarios organizados por usuario
+1. **Panel Admin**: Accede al panel de administración para ver todos los documentos
+2. **Gestión**: Ver documentos de todos los usuarios organizados por usuario
 
 ## Tipos de Documentos Soportados
 
@@ -178,15 +159,10 @@ Si el puerto 3000 está ocupado:
 ```bash
 # Encontrar proceso
 netstat -ano | findstr :3000
-# Terminar proceso (reemplazar PID)
+# Terminar proceso (reemplazar PID por el puerto)
 taskkill /F /PID [PID]
 ```
 
-### Crear Administrador
-```bash
-cd backend
-npm run create-admin
-```
 Credenciales por defecto: admin@docmanager.com / admin123456
 
 ## Desarrollo
