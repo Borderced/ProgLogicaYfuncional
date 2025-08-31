@@ -41,8 +41,8 @@ paginaBecerro/
 ## Instalación y Configuración
 
 ### 1. Configurar Apikeys
- Descarga el archivo frontend.rar que envie al grupo de whatsapp (extraelo, te saldra un archivo .env) y pegalo dentro de la carpeta ``` frontend ``` en el proyecto
- Descarga el archivo backend.rar que tambien envie al grupo de whatsapp (extraelo) y pega el contenido dentro de la carpeta ``` backend ``` en el proyecto
+ - Descarga el archivo frontend.rar que envie al grupo de whatsapp (extraelo, te saldra un archivo .env) y pegalo dentro de la carpeta ``` frontend ``` en el proyecto
+ - Descarga el archivo backend.rar que tambien envie al grupo de whatsapp (extraelo) y pega el contenido dentro de la carpeta ``` backend ``` en el proyecto
 
 
 ### 2. Instalar Dependencias
@@ -51,11 +51,9 @@ Para instalar las dependencias (debes tener nodejs instalado):
 
 ```bash
 # En una terminal en la carpeta Backend
-cd backend
 npm install
 
 # En una terminal en la carpeta Frontend
-cd ../frontend
 npm install --legacy-peer-deps
 ```
 
